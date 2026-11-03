@@ -7,7 +7,7 @@ Train a neural network to land a rocket using **Proximal Policy Optimization (PP
 ![Stable Baselines3](https://img.shields.io/badge/SB3-PPO-green)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-> 👨‍💻 **Developed by Tolosa** &nbsp;|&nbsp; ⭐ GitHub: [@dug6464](https://github.com/dug6464)
+> 👨‍💻 **Developed by dug** &nbsp;|&nbsp; ⭐ GitHub: [@dug6464](https://github.com/dug6464)
 
 ---
 
@@ -154,7 +154,7 @@ MIT — do whatever you want with it.
 <table>
   <tr>
     <td align="center">
-      <strong>Tolosa</strong><br/>
+      <strong>dug</strong><br/>
       Creator & Developer<br/><br/>
       <a href="https://github.com/dug6464">
         <img src="https://img.shields.io/badge/GitHub-dug6464-181717?style=for-the-badge&logo=github" alt="GitHub: dug6464"/>
@@ -174,6 +174,6 @@ MIT — do whatever you want with it.
 ---
 
 <p align="center">
-  Developed with ❤️ by <strong>Tolosa</strong> &nbsp;•&nbsp;
+  Developed with ❤️ by <strong>dug</strong> &nbsp;•&nbsp;
   <a href="https://github.com/dug6464">GitHub: dug6464</a>
 </p>

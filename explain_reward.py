@@ -4,7 +4,7 @@
 Generates a chart explaining how the shaped reward is composed
 during a simulated landing trajectory. Educational / demo use.
 
-👨‍💻 Developed by Tolosa  |  GitHub: https://github.com/dug6464
+👨‍💻 Developed by dug  |  GitHub: https://github.com/dug6464
 
 Run: python explain_reward.py
 """

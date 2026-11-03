@@ -6,7 +6,7 @@ Trains an AI agent to land a rocket using:
   • PPO (Proximal Policy Optimization) — the same family used by Tesla for robot training
   • Custom reward shaping to steer learning faster
 
-👨‍💻 Developed by Tolosa  |  GitHub: https://github.com/dug6464
+👨‍💻 Developed by dug  |  GitHub: https://github.com/dug6464
 
 Run: python train.py
 """
