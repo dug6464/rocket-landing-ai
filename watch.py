@@ -3,6 +3,8 @@
 =============================================
 Loads the best saved model and renders it landing rockets in real-time.
 
+👨‍💻 Developed by Tolosa  |  GitHub: https://github.com/dug6464
+
 Run: python watch.py
      python watch.py --model models/rocket_ppo_final   (pick a specific checkpoint)
      python watch.py --episodes 20                     (run more episodes)

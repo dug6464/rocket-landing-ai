@@ -7,6 +7,8 @@ Train a neural network to land a rocket using **Proximal Policy Optimization (PP
 ![Stable Baselines3](https://img.shields.io/badge/SB3-PPO-green)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
+> 👨‍💻 **Developed by Tolosa** &nbsp;|&nbsp; ⭐ GitHub: [@dug6464](https://github.com/dug6464)
+
 ---
 
 ## 🎬 What it does
@@ -144,3 +146,34 @@ Tesla uses PPO (or a close variant) for Full Self-Driving and Optimus robot moto
 ## 📄 License
 
 MIT — do whatever you want with it.
+
+---
+
+## 👨‍💻 Author & Developer
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>Tolosa</strong><br/>
+      Creator & Developer<br/><br/>
+      <a href="https://github.com/dug6464">
+        <img src="https://img.shields.io/badge/GitHub-dug6464-181717?style=for-the-badge&logo=github" alt="GitHub: dug6464"/>
+      </a><br/><br/>
+      <sub>🤖 AI/ML • 🚀 Rocket RL • 🧠 Reward Shaping</sub>
+    </td>
+  </tr>
+</table>
+
+**Tech stack used in this project:**
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white)
+![Gymnasium](https://img.shields.io/badge/Gymnasium-0081A5?style=flat)
+![TensorBoard](https://img.shields.io/badge/TensorBoard-FF6F00?style=flat&logo=tensorflow&logoColor=white)
+
+---
+
+<p align="center">
+  Developed with ❤️ by <strong>Tolosa</strong> &nbsp;•&nbsp;
+  <a href="https://github.com/dug6464">GitHub: dug6464</a>
+</p>

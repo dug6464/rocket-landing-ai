@@ -4,6 +4,8 @@
 Reads the evaluations.npz file saved by EvalCallback and plots
 mean reward over training steps.
 
+👨‍💻 Developed by Tolosa  |  GitHub: https://github.com/dug6464
+
 Run: python plot_progress.py
 """
 
