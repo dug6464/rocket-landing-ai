@@ -5,10 +5,12 @@ __pycache__/
 *.pyd
 .Python
 
-# Training outputs (too large for git)
+# Training outputs (large files — do not commit)
 models/
 logs/
 *.zip
+
+# Generated images
 *.png
 
 # Virtual environments
@@ -20,3 +22,4 @@ env/
 .vscode/
 .idea/
 *.swp
+.DS_Store

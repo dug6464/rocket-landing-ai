@@ -1,82 +1,64 @@
 """
-🛸 Rocket Lander — Watch your trained AI fly
-=============================================
-Loads the best saved model and renders it landing rockets in real-time.
+🛸 watch.py — Watch your trained rocket land in real time
+==========================================================
+Renders the agent using the trained PPO model with a live window.
 
 👨‍💻 Developed by dug  |  GitHub: https://github.com/dug6464
 
 Run: python watch.py
-     python watch.py --model models/rocket_ppo_final   (pick a specific checkpoint)
-     python watch.py --episodes 20                     (run more episodes)
+     python watch.py --model models/rocket_ppo_final
+     python watch.py --episodes 20
 """
 
 import argparse
 import os
-import gymnasium as gym
 import numpy as np
 from stable_baselines3 import PPO
 
+from env import make_render_env
+
 # ── CLI ────────────────────────────────────────────────────────────────────────
 parser = argparse.ArgumentParser(description="Watch the trained rocket lander")
-parser.add_argument("--model",    default="models/best_model/best_model",
-                    help="Path to saved model (without .zip)")
-parser.add_argument("--episodes", type=int, default=10,
-                    help="Number of episodes to render")
-parser.add_argument("--no-shaped-reward", action="store_true",
-                    help="Use raw environment (no wrapper) for evaluation")
+parser.add_argument("--model",    default="models/best_model/best_model")
+parser.add_argument("--episodes", type=int, default=10)
 args = parser.parse_args()
 
-# ── Load model ─────────────────────────────────────────────────────────────────
-model_path = args.model
-if not os.path.exists(model_path + ".zip"):
-    alt = "models/rocket_ppo_final"
-    if os.path.exists(alt + ".zip"):
-        print(f"⚠️  {model_path}.zip not found — falling back to {alt}.zip")
-        model_path = alt
-    else:
-        print("❌  No trained model found. Run  python train.py  first.")
-        raise SystemExit(1)
 
-print(f"🧠  Loading model: {model_path}.zip")
-model = PPO.load(model_path)
+def load_model(path: str) -> PPO:
+    for p in [path, "models/rocket_ppo_final"]:
+        if os.path.exists(p + ".zip"):
+            print(f"🧠  Loading: {p}.zip")
+            return PPO.load(p)
+    print("❌  No model found. Run  python train.py  first.")
+    raise SystemExit(1)
 
-# ── Environment ────────────────────────────────────────────────────────────────
-env = gym.make("LunarLander-v3", render_mode="human")
 
-# ── Statistics ─────────────────────────────────────────────────────────────────
-rewards   = []
-successes = []   # episode ended with both legs on pad
+if __name__ == "__main__":
+    model = load_model(args.model)
+    env   = make_render_env()
 
-print(f"\n🚀  Launching {args.episodes} landing attempts …  (close the window to stop)\n")
-print(f"{'Episode':>8}  {'Reward':>10}  {'Steps':>7}  {'Result'}")
-print("─" * 42)
+    rewards, successes = [], []
+    print(f"\n🚀  Launching {args.episodes} landing attempts …\n")
+    print(f"{'Ep':>4}  {'Reward':>10}  {'Steps':>6}  Result")
+    print("─" * 36)
 
-for ep in range(1, args.episodes + 1):
-    obs, _ = env.reset()
-    total_reward = 0.0
-    steps        = 0
-    done         = False
+    for ep in range(1, args.episodes + 1):
+        obs, _ = env.reset()
+        total, steps, done = 0.0, 0, False
 
-    while not done:
-        action, _ = model.predict(obs, deterministic=True)
-        obs, reward, terminated, truncated, info = env.step(action)
-        total_reward += reward
-        steps        += 1
-        done = terminated or truncated
+        while not done:
+            action, _ = model.predict(obs, deterministic=True)
+            obs, reward, terminated, truncated, _ = env.step(action)
+            total += reward
+            steps += 1
+            done = terminated or truncated
 
-    landed  = bool(obs[6] or obs[7])   # leg contact sensor
-    success = landed and total_reward > 200
-    result  = "🟢 LANDED" if success else ("🟡 SURVIVED" if total_reward > 0 else "🔴 CRASHED")
+        success = (bool(obs[6]) or bool(obs[7])) and total > 200
+        label   = "🟢 LANDED" if success else ("🟡 OK" if total > 0 else "🔴 CRASH")
+        rewards.append(total); successes.append(success)
+        print(f"{ep:>4}  {total:>10.1f}  {steps:>6}  {label}")
 
-    rewards.append(total_reward)
-    successes.append(success)
-
-    print(f"{ep:>8}  {total_reward:>10.1f}  {steps:>7}  {result}")
-
-env.close()
-
-# ── Summary ─────────────────────────────────────────────────────────────────────
-print("\n" + "─" * 42)
-print(f"  Mean reward : {np.mean(rewards):.1f}")
-print(f"  Best reward : {np.max(rewards):.1f}")
-print(f"  Success rate: {100 * np.mean(successes):.0f}%  ({sum(successes)}/{args.episodes} landings)")
+    env.close()
+    print(f"\n  Mean: {np.mean(rewards):.1f}  │  "
+          f"Best: {np.max(rewards):.1f}  │  "
+          f"Success: {100*np.mean(successes):.0f}% ({sum(successes)}/{args.episodes})")
