@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Training outputs (too large for git)
+models/
+logs/
+*.zip
+*.png
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Editor
+.vscode/
+.idea/
+*.swp
